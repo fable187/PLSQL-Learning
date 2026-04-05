@@ -1,0 +1,8 @@
+DECLARE
+      v_result NUMBER;
+BEGIN
+   v_result := 1 / 0;
+   EXCEPTION
+      WHEN ZERO_DIVIDE THEN
+         DBMS_OUTPUT.PUT_LINE( SQLERRM );
+END;
