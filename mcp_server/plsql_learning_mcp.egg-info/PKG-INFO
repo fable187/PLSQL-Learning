@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: plsql-learning-mcp
+Version: 0.1.0
+Summary: FastMCP Oracle server for the PLSQL learning project
+Requires-Python: >=3.10
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: oracledb>=2.0.0

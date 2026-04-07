@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21-slim
+    environment:
+      ORACLE_PASSWORD: oracle123
+      ORACLE_DATABASE: PLSQLDB
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./init.sql:/container-entrypoint-initdb.d/01_init.sql
+    healthcheck:
+      test: ["CMD", "sqlplus", "-v"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  oracle_data:
