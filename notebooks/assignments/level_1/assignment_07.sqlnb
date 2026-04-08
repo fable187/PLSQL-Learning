@@ -1,0 +1,39 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(7);
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      -- Your solution here.
+      -- Create procedure: assignment_07_solution
+      -- Validator looks for Multiplication Table for 5 and 5 x 10 = 50
+      create or REPLACE procedure assignment_07_solution as
+      BEGIN
+          DBMS_OUTPUT.PUT_LINE('Multiplication Table for 5:');
+          FOR i IN 1..10 LOOP
+              DBMS_OUTPUT.PUT_LINE('5 x ' || i || ' = ' || (5 * i));
+          END LOOP;
+      END;    
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: "begin \r
+
+      \    assignment_07_solution;\r
+
+      end;"
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 7',
+              p_plsql_block => 'BEGIN assignment_07_solution; END;',
+              p_expected_tokens => 'Multiplication Table for 5|5 x 10 = 50'
+          );
+      END;
+      /
+    languageId: oracle-sql

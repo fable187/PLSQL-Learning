@@ -1,0 +1,23 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(35);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create setup objects and procedure: assignment_35_solution
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 35',
+              p_plsql_block => 'BEGIN assignment_35_solution; END;',
+              p_expected_tokens => 'Rows fetched: 4|First id: 1'
+          );
+      END;
+      /
+    languageId: oracle-sql

@@ -1,0 +1,53 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(15);
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      -- Your solution here.
+
+      -- Create procedure: assignment_15_solution
+
+      -- Validator checks output contains: LEARNING_CURRICULUM and
+      SAMPLE_EMPLOYEES
+
+      create or replace procedure assignment_15_solution IS
+
+      cursor c_tables IS
+          SELECT table_name
+          FROM user_tables
+          WHERE table_name IN ('LEARNING_CURRICULUM', 'SAMPLE_EMPLOYEES');
+      BEGIN
+          FOR r_table IN c_tables LOOP
+              DBMS_OUTPUT.PUT_LINE(r_table.table_name);
+          END LOOP;
+      END;
+
+      /   
+    languageId: oracle-sql
+  - kind: 2
+    value: "begin\r
+
+      \    assignment_15_solution;\r
+
+      end;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 15',
+              p_plsql_block => 'BEGIN assignment_15_solution; END;',
+              p_expected_tokens => 'LEARNING_CURRICULUM|SAMPLE_EMPLOYEES'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

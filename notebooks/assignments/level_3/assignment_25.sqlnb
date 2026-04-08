@@ -1,0 +1,32 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(25);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create any setup objects you need, including an audit table named assignment_25_audit
+      -- and a trigger named assignment_25_insert_trg on sample_employees.
+      -- The validator inserts employee_id 9001 and expects one audit row in assignment_25_audit.
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      BEGIN
+          DELETE FROM sample_employees WHERE employee_id = 9001;
+          DELETE FROM assignment_25_audit WHERE employee_id = 9001;
+          INSERT INTO sample_employees(employee_id, first_name, last_name, salary, department)
+          VALUES (9001, 'Audit', 'Test', 1000, 'QA');
+          system.assignment_validator_pkg.expect_query_returns_number(
+              p_test_name => 'Assignment 25',
+              p_sql => 'SELECT COUNT(*) FROM assignment_25_audit WHERE employee_id = 9001',
+              p_expected_value => 1
+          );
+          DELETE FROM sample_employees WHERE employee_id = 9001;
+          DELETE FROM assignment_25_audit WHERE employee_id = 9001;
+          COMMIT;
+      END;
+      /
+    languageId: oracle-sql

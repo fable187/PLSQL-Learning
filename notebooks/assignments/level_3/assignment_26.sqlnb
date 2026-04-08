@@ -1,0 +1,30 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(26);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create trigger: assignment_26_prevent_salary_drop
+      -- It should block salary decreases on sample_employees with RAISE_APPLICATION_ERROR(-20001, ...)
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      DECLARE l_old_salary NUMBER;
+      BEGIN
+          SELECT salary INTO l_old_salary FROM sample_employees WHERE employee_id = 1;
+          BEGIN
+              UPDATE sample_employees SET salary = l_old_salary - 1 WHERE employee_id = 1;
+              DBMS_OUTPUT.PUT_LINE('[FAIL] Update should have been blocked');
+          EXCEPTION
+              WHEN OTHERS THEN
+                  IF SQLCODE = -20001 THEN DBMS_OUTPUT.PUT_LINE('[PASS] Assignment 26 trigger blocked salary decrease');
+                  ELSE DBMS_OUTPUT.PUT_LINE('[FAIL] Unexpected error: ' || SQLERRM); END IF;
+          END;
+          ROLLBACK;
+      END;
+      /
+    languageId: oracle-sql

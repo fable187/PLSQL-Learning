@@ -1,0 +1,24 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(23);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create procedure: assignment_23_solution
+      -- Validator checks output contains: Engineering
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 23',
+              p_plsql_block => 'BEGIN assignment_23_solution; END;',
+              p_expected_tokens => 'Engineering'
+          );
+      END;
+      /
+    languageId: oracle-sql

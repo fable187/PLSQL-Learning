@@ -1,0 +1,25 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(30);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create any setup you need, including table assignment_30_target and procedure assignment_30_solution.
+      -- Validator calls assignment_30_solution and expects 3 rows in assignment_30_target.
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      BEGIN
+          assignment_30_solution;
+          system.assignment_validator_pkg.expect_query_returns_number(
+              p_test_name => 'Assignment 30',
+              p_sql => 'SELECT COUNT(*) FROM assignment_30_target',
+              p_expected_value => 3
+          );
+      END;
+      /
+    languageId: oracle-sql

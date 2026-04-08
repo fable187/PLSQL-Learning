@@ -1,0 +1,23 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(33);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create procedure: assignment_33_solution
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 33',
+              p_plsql_block => 'BEGIN assignment_33_solution; END;',
+              p_expected_tokens => 'Emp 1: Ada salary 5000'
+          );
+      END;
+      /
+    languageId: oracle-sql

@@ -128,10 +128,10 @@ def project_relative_path(relative_path: str) -> Path:
 
 
 @mcp.resource("oracle://connection-config")
-def connection_config_resource() -> dict[str, Any]:
+def connection_config_resource() -> str:
     """Show the Oracle connection settings this MCP server will use."""
     config = get_oracle_config()
-    return {
+    payload = {
         "user": config.user,
         "host": config.host,
         "port": config.port,
@@ -139,17 +139,18 @@ def connection_config_resource() -> dict[str, Any]:
         "dsn": config.dsn,
         "project_root": str(PROJECT_ROOT),
     }
+    return json.dumps(payload, indent=2)
 
 
 @mcp.resource("project://sql-files")
-def project_sql_files_resource() -> list[str]:
+def project_sql_files_resource() -> str:
     """List SQL files available in this learning project."""
     files = sorted(
         str(path.relative_to(PROJECT_ROOT))
         for path in PROJECT_ROOT.rglob("*.sql")
         if ".git" not in path.parts
     )
-    return files
+    return "\n".join(files)
 
 
 @mcp.tool
@@ -341,4 +342,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

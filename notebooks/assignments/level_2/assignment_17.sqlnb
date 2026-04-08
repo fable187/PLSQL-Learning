@@ -1,0 +1,35 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(17);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      create or replace procedure assignment_17_solution IS
+          CURSOR c_tables(p_table_name VARCHAR2) IS
+              SELECT table_name
+              FROM user_tables
+              WHERE table_name = p_table_name;
+      BEGIN
+          FOR r_table IN c_tables('ETL_CONTROL') LOOP
+              DBMS_OUTPUT.PUT_LINE(r_table.table_name);
+          END LOOP;
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 17',
+              p_plsql_block => 'BEGIN assignment_17_solution; END;',
+              p_expected_tokens => 'ETL_CONTROL'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

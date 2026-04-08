@@ -1,0 +1,58 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(3);
+    languageId: oracle-sql
+  - kind: 2
+    value: >-
+      -- Your solution here.
+
+      -- Create procedure: assignment_03_solution
+
+      -- The validator checks for:
+
+      --   Commission is: 0
+
+      --   Base Salary: 50000
+
+      --   Commission: Not Applicable
+
+      --   Total Earnings: 50000
+
+      create or replace procedure assignment_03_solution as
+          v_base_salary number := 50000;
+          v_commission number := 0;
+          v_total_earnings number;
+          BEGIN
+              v_total_earnings := v_base_salary + v_commission;
+              dbms_output.put_line('Commission is: ' || v_commission);
+              dbms_output.put_line('Base Salary: ' || v_base_salary);
+              dbms_output.put_line('Commission: Not Applicable');
+              dbms_output.put_line('Total Earnings: ' || nvl(v_total_earnings, 0));
+          END;
+    languageId: oracle-sql
+  - kind: 2
+    value: "BEGIN \r
+
+      \    assignment_03_solution;\r
+
+      END;"
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      SET SERVEROUTPUT ON SIZE 1000000;
+
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 3',
+              p_plsql_block => 'BEGIN assignment_03_solution; END;',
+              p_expected_tokens => 'Commission is: 0|Base Salary: 50000|Commission: Not Applicable|Total Earnings: 50000'
+          );
+      END;
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

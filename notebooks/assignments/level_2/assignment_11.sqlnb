@@ -1,0 +1,37 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(11);
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      -- Your solution here.
+      -- Create procedure: assignment_11_square(p_number IN NUMBER)
+      -- Validator calls: assignment_11_square(5)
+      create or replace PROCEDURE assignment_11_square(p_number IN NUMBER) IS
+      BEGIN
+          DBMS_OUTPUT.PUT_LINE('Square: '|| (p_number * p_number));
+      END;
+      /
+
+      BEGIN
+          assignment_11_square(5);
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 11',
+              p_plsql_block => 'BEGIN assignment_11_square(5); END;',
+              p_expected_tokens => 'Square: 25'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

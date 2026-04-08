@@ -1,0 +1,49 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(10);
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      -- Your solution here.
+
+      -- Create procedure: assignment_10_solution
+
+      -- Validator checks for token: No data found
+
+      create or replace procedure assignment_10_solution is
+          v_employee_id employees.employee_id%type := 9999; -- Non-existent employee ID
+          v_first_name employees.first_name%type;
+          v_last_name employees.last_name%type;
+      begin
+          -- Attempt to retrieve employee details
+          select first_name, last_name
+          into v_first_name, v_last_name
+          from employees
+          where employee_id = v_employee_id;
+          
+          -- If the employee is found, output their name
+          dbms_output.put_line('Employee Found: ' || v_first_name || ' ' || v_last_name);
+      exception
+          when no_data_found then
+              dbms_output.put_line('No data found for employee ID: ' || v_employee_id);
+      end assignment_10_solution; 
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 10',
+              p_plsql_block => 'BEGIN assignment_10_solution; END;',
+              p_expected_tokens => 'No data found'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

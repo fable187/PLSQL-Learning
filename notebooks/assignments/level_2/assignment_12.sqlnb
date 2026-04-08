@@ -1,0 +1,49 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(12);
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      -- Your solution here.
+
+      -- Create procedure: assignment_12_rectangle(p_length IN NUMBER, p_width
+      IN NUMBER)
+
+      -- Validator calls: assignment_12_rectangle(10, 5)
+
+
+      create or REPLACE PROCEDURE assignment_12_rectangle(
+          p_length IN NUMBER, 
+          p_width IN NUMBER) IS
+          o_area NUMBER;
+      BEGIN
+          o_area := p_length * p_width;
+          DBMS_OUTPUT.PUT_LINE('Area: ' || o_area);
+      END;
+
+      /
+
+
+      -- VARIABLE area NUMBER;
+
+      -- EXECUTE assignment_12_rectangle(10, 5, :area);
+
+      -- PRINT area;
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 12',
+              p_plsql_block => 'BEGIN assignment_12_rectangle(10, 5); END;',
+              p_expected_tokens => 'Area: 50'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

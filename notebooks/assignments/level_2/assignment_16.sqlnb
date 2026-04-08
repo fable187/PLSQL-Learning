@@ -1,0 +1,45 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(16);
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      -- Your solution here.
+      -- Create procedure: assignment_16_solution
+      -- Validator checks output contains: LEARNING_CURRICULUM
+      create or replace procedure assignment_16_solution IS
+      cursor c_tables IS
+          select table_name
+          from user_tables;
+      v_table_name user_tables.table_name%TYPE;
+      BEGIN
+          OPEN c_tables;
+          LOOP
+              FETCH c_tables INTO v_table_name;
+              EXIT WHEN c_tables%NOTFOUND;
+              IF v_table_name = 'LEARNING_CURRICULUM' THEN
+                  DBMS_OUTPUT.PUT_LINE('Table found: ' || v_table_name);
+                  EXIT; -- Exit the loop once the table is found
+              END IF;
+          END LOOP;
+          CLOSE c_tables;
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 16',
+              p_plsql_block => 'BEGIN assignment_16_solution; END;',
+              p_expected_tokens => 'LEARNING_CURRICULUM'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

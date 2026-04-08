@@ -1,0 +1,26 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(41);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create package spec and body: assignment_41_pkg
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      BEGIN
+          DBMS_SESSION.RESET_PACKAGE;
+          assignment_41_pkg.log_call;
+          assignment_41_pkg.log_call;
+          system.assignment_validator_pkg.expect_query_returns_number(
+              p_test_name => 'Assignment 41',
+              p_sql => 'SELECT assignment_41_pkg.get_call_count FROM dual',
+              p_expected_value => 2
+          );
+      END;
+      /
+    languageId: oracle-sql

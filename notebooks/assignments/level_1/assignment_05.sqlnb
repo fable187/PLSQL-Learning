@@ -1,0 +1,51 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(5);
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      -- Your solution here.
+      -- Create procedure: assignment_05_solution
+      -- Current validator checks for output: Score: 85 - Grade: B
+      CREATE OR REPLACE PROCEDURE assignment_05_solution AS
+          v_score NUMBER := 85;
+          v_grade VARCHAR2(1);
+      BEGIN
+          CASE
+              WHEN v_score BETWEEN 90 AND 100 THEN v_grade := 'A';
+              WHEN v_score BETWEEN 80 AND 89 THEN v_grade := 'B';
+              WHEN v_score BETWEEN 70 AND 79 THEN v_grade := 'C';
+              WHEN v_score BETWEEN 60 AND 69 THEN v_grade := 'D';
+              ELSE v_grade := 'F';
+          END CASE;
+
+          DBMS_OUTPUT.PUT_LINE('Score: ' || v_score || ' - Grade: ' || v_grade);
+      END;
+      /
+         
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: "begin \r
+
+      \    assignment_05_solution;\r
+
+      end;"
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 5',
+              p_plsql_block => 'BEGIN assignment_05_solution; END;',
+              p_expected_tokens => 'Score: 85 - Grade: B'
+          );
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

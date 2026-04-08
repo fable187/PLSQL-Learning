@@ -1,0 +1,42 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(14);
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      -- Your solution here.
+
+      -- Create function: assignment_14_compound_interest(p_principal IN NUMBER,
+      p_rate IN NUMBER, p_years IN NUMBER) RETURN NUMBER
+
+      -- Validator checks expected value 1210 for inputs (1000, 0.10, 2)
+
+
+      create or REPLACE FUNCTION assignment_14_compound_interest(p_principal IN
+      NUMBER, p_rate IN NUMBER, p_years IN NUMBER) RETURN NUMBER IS
+
+      BEGIN
+          RETURN p_principal * POWER(1 + p_rate, p_years);
+      END;
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      SET SERVEROUTPUT ON;
+
+      BEGIN
+          system.assignment_validator_pkg.expect_query_returns_number(
+              p_test_name => 'Assignment 14',
+              p_sql => 'SELECT assignment_14_compound_interest(1000, 0.10, 2) FROM dual',
+              p_expected_value => 1210
+          );
+      END;
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

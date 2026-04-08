@@ -1,0 +1,24 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(21);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create package spec: assignment_21_pkg
+      -- Validator checks that PACKAGE ASSIGNMENT_21_PKG exists
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      BEGIN
+          system.assignment_validator_pkg.expect_object_exists(
+              p_test_name => 'Assignment 21',
+              p_object_name => 'ASSIGNMENT_21_PKG',
+              p_object_type => 'PACKAGE'
+          );
+      END;
+      /
+    languageId: oracle-sql

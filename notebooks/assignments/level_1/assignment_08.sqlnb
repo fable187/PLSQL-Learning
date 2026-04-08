@@ -1,0 +1,40 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(8);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      CREATE OR REPLACE PROCEDURE assignment_08_solution AS
+          v_counter NUMBER := 1;
+          v_sum NUMBER := 0;
+      BEGIN
+          WHILE v_counter <= 100 LOOP
+              v_sum := v_sum + v_counter;
+              v_counter := v_counter + 1;
+          END LOOP;
+
+          DBMS_OUTPUT.PUT_LINE('Sum of numbers from 1 to 100: ' || v_sum);
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: "BEGIN\r
+
+      \    assignment_08_solution;\r
+
+      END;"
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 8',
+              p_plsql_block => 'BEGIN assignment_08_solution; END;',
+              p_expected_tokens => 'Sum of numbers from 1 to 100: 5050'
+          );
+      END;
+      /
+    languageId: oracle-sql

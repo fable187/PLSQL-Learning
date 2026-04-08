@@ -1,0 +1,30 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(1);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create this procedure so the validator can run it:
+      CREATE OR REPLACE PROCEDURE assignment_01_solution AS
+      BEGIN
+          DBMS_OUTPUT.PUT_LINE('Hello, PL/SQL!');
+          DBMS_OUTPUT.PUT_LINE('Hello, World!');
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON SIZE 1000000;
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 1',
+              p_plsql_block => 'BEGIN assignment_01_solution; END;',
+              p_expected_tokens => 'Hello, PL/SQL!|Hello, World!',
+              p_show_output => 'Y'
+          );
+      END;
+      /
+    languageId: oracle-sql

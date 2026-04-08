@@ -1,0 +1,29 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(22);
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      -- Your solution here.
+      -- Create package body for: assignment_21_pkg
+      -- Validator checks PACKAGE BODY exists and SELECT assignment_21_pkg.get_max(9,4) FROM dual = 9
+    languageId: oracle-sql
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      BEGIN
+          system.assignment_validator_pkg.expect_object_exists(
+              p_test_name => 'Assignment 22 package body',
+              p_object_name => 'ASSIGNMENT_21_PKG',
+              p_object_type => 'PACKAGE BODY'
+          );
+          system.assignment_validator_pkg.expect_query_returns_number(
+              p_test_name => 'Assignment 22 function check',
+              p_sql => 'SELECT assignment_21_pkg.get_max(9, 4) FROM dual',
+              p_expected_value => 9
+          );
+      END;
+      /
+    languageId: oracle-sql

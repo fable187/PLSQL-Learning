@@ -1,0 +1,58 @@
+cells:
+  - kind: 2
+    value: |
+      SET SERVEROUTPUT ON;
+      EXEC show_assignment(2);
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      -- Your solution here.
+
+      -- Create procedure: assignment_02_solution
+
+      -- The validator expects output matching the sample values shown below
+      unless you also update the validator.
+
+      -- Expected tokens currently checked:
+
+      --   Age: 25
+
+      --   Name: Gael
+
+      --   Birth Date: 2000-01-15
+
+      --   Salary: 50000
+
+
+      create or replace procedure assignment_02_solution as
+          v_age NUMBER := 25;
+          v_name VARCHAR2(50) := 'Gael';
+          v_birth_date DATE := TO_DATE('2000-01-15', 'YYYY-MM-DD');
+          v_salary NUMBER := 50000;
+      BEGIN
+          DBMS_OUTPUT.PUT_LINE('Age: ' || v_age);
+          DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+          DBMS_OUTPUT.PUT_LINE('Birth Date: ' || TO_CHAR(v_birth_date, 'YYYY-MM-DD'));
+          DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+      END;
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: >
+      SET SERVEROUTPUT ON SIZE 1000000;
+
+      BEGIN
+          system.assignment_validator_pkg.expect_output_contains(
+              p_test_name => 'Assignment 2',
+              p_plsql_block => 'BEGIN assignment_02_solution; END;',
+              p_expected_tokens => 'Age: 25|Name: Gael|Birth Date: 2000-01-15|Salary: 50000',
+              p_show_output => 'Y'
+          );
+      END;
+
+      /
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql

@@ -1,17 +1,16 @@
-# 🎓 Interactive PL/SQL Learning Course
+# Interactive PL/SQL Learning Course
 
 ## Overview
-This is a comprehensive, self-paced learning curriculum with **32 assignments** organized into 4 levels, designed to take you from PL/SQL beginner to expert. Each assignment has clear objectives, hints, and you can verify your work as you complete them.
 
----
+This project now uses a 44-assignment curriculum stored in `SYSTEM.LEARNING_CURRICULUM`.
+The course is designed for daily practice over several weeks, with one assignment solved at a time and reviewed before it is marked complete.
 
-## 📚 Course Structure
+## Course Structure
 
-### **LEVEL 1: Fundamentals** (Assignments 1-8)
-Master core PL/SQL concepts: variables, control flow, and loops.
+### LEVEL 1: Fundamentals
 
-| # | Topic | Assignment | 
-|----|-------|-----------|
+| # | Topic | Assignment |
+|---|---|---|
 | 1 | Variables & Basics | Hello PL/SQL |
 | 2 | Variables & Basics | Variable Declaration |
 | 3 | Variables & Basics | Working with NULL |
@@ -21,11 +20,10 @@ Master core PL/SQL concepts: variables, control flow, and loops.
 | 7 | Loops | FOR Loop |
 | 8 | Loops | WHILE Loop |
 
-### **LEVEL 2: Intermediate** (Assignments 9-17)
-Work with database queries, procedures, functions, and cursors.
+### LEVEL 2: Intermediate
 
-| # | Topic | Assignment | 
-|----|-------|-----------|
+| # | Topic | Assignment |
+|---|---|---|
 | 9 | SELECT INTO | Basic SELECT INTO |
 | 10 | SELECT INTO | Handling NO_DATA_FOUND |
 | 11 | Procedures | Simple Procedure |
@@ -36,11 +34,10 @@ Work with database queries, procedures, functions, and cursors.
 | 16 | Cursors | Cursor FOR Loop |
 | 17 | Cursors | Parameterized Cursor |
 
-### **LEVEL 3: Advanced** (Assignments 18-26)
-Master exception handling, packages, records, and triggers.
+### LEVEL 3: Advanced
 
-| # | Topic | Assignment | 
-|----|-------|-----------|
+| # | Topic | Assignment |
+|---|---|---|
 | 18 | Exception Handling | Basic Exceptions |
 | 19 | Exception Handling | User-Defined Exceptions |
 | 20 | Exception Handling | Exception with SQLCODE |
@@ -51,11 +48,10 @@ Master exception handling, packages, records, and triggers.
 | 25 | Triggers | Simple INSERT Trigger |
 | 26 | Triggers | UPDATE Trigger |
 
-### **LEVEL 4: Expert** (Assignments 27-32)
-Learn bulk operations, collections, and dynamic SQL.
+### LEVEL 4: Expert
 
-| # | Topic | Assignment | 
-|----|-------|-----------|
+| # | Topic | Assignment |
+|---|---|---|
 | 27 | Collections | Nested Tables |
 | 28 | Collections | Associative Arrays |
 | 29 | BULK Operations | BULK COLLECT |
@@ -63,164 +59,94 @@ Learn bulk operations, collections, and dynamic SQL.
 | 31 | Advanced | Dynamic SQL |
 | 32 | Advanced | Refactoring Project |
 
----
+### LEVEL 5: Bulk Processing Foundations
 
-## 🚀 How to Get Started
+| # | Topic | Assignment |
+|---|---|---|
+| 33 | Records | Record Warm-Up |
+| 34 | Collections | Nested Table Aggregation |
+| 35 | BULK Operations | BULK COLLECT with Setup Data |
+| 36 | BULK Operations | FORALL Data Load |
 
-### Step 1: View Your Curriculum
+### LEVEL 6: Data Access Patterns
+
+| # | Topic | Assignment |
+|---|---|---|
+| 37 | Cursors | Explicit Cursor Reporting |
+| 38 | Cursors | Parameterized Cursor Filtering |
+| 39 | Advanced | Dynamic SQL Table Counter |
+| 40 | Exception Handling | Custom Validation Exception |
+
+### LEVEL 7: Production Patterns
+
+| # | Topic | Assignment |
+|---|---|---|
+| 41 | Packages | Package State Counter |
+| 42 | Packages | Collection-Returning Package Function |
+| 43 | Transactions | Autonomous Transaction Logger |
+| 44 | Triggers | Compound Trigger Summary |
+
+## Core Commands
+
+View the full curriculum:
+
 ```sql
-SELECT assignment_id, level_num, topic, title 
-FROM learning_curriculum 
+SELECT assignment_id, level_num, topic, title
+FROM learning_curriculum
 ORDER BY assignment_id;
 ```
 
-### Step 2: Get Details on an Assignment
-To get detailed instructions, objectives, and hints for any assignment:
-```sql
-EXEC show_assignment(4);
-```
-Replace `4` with the assignment number you want to learn about.
+View one assignment in detail:
 
-### Step 3: Complete the Assignment
-- Write your PL/SQL code in a new SQL file
-- Test it thoroughly to ensure it works
-- Verify the outputs match the requirements
-
-### Step 4: Log Your Completion
-Once you've verified your solution works:
 ```sql
-EXEC log_assignment_attempt(4, 'COMPLETED', 'Successfully created IF statement checking positive/negative');
+EXEC show_assignment(1);
 ```
 
-### Step 5: Track Your Progress
+Track progress:
+
 ```sql
 EXEC show_progress;
 ```
 
----
+Log a completed assignment:
 
-## 📝 Example: Assignment #4
-
-### Get the Assignment Details
 ```sql
-EXEC show_assignment(4);
+EXEC log_assignment_attempt(1, 'COMPLETED', 'First block created and verified');
 ```
 
-### Assignment Requirements
-**Topic:** Control Structures  
-**Title:** Simple IF Statement  
-**Description:** Check if a number is positive, negative, or zero  
-**Objectives:** Learn IF...THEN...ELSIF...ELSE...END IF syntax  
-**Hints:** Use comparison operators (>, <, =, >=, <=)  
+## How We Will Work
 
-### Sample Solution
-```plsql
-DECLARE
-  v_number NUMBER := -5;
-BEGIN
-  IF v_number > 0 THEN
-    DBMS_OUTPUT.PUT_LINE(v_number || ' is positive');
-  ELSIF v_number < 0 THEN
-    DBMS_OUTPUT.PUT_LINE(v_number || ' is negative');
-  ELSE
-    DBMS_OUTPUT.PUT_LINE(v_number || ' is zero');
-  END IF;
-END;
-/
-```
+For each assignment:
 
-### Test Your Solution
-Run your code and verify the output is correct. If it works, log it:
-```sql
-EXEC log_assignment_attempt(4, 'COMPLETED', 'IF statement working correctly for positive, negative, and zero values');
-```
+1. Run `EXEC show_assignment(<id>);`
+2. Solve it in your own SQL file
+3. Execute it
+4. Paste me the code and the output or error
+5. I review it with you
+6. When it is correct, log it as `COMPLETED`
 
----
+This keeps the course focused and lets us verify each concept before moving on.
 
-## 💡 Tips for Success
+## Recommended Pace
 
-1. **Start at Level 1** - Even if you know some PL/SQL, the fundamentals are important
-2. **Test Thoroughly** - Make sure your code produces the expected output
-3. **Use Hints** - If stuck, run `EXEC show_assignment(X)` to see helpful hints
-4. **Practice, Practice** - Complete 1-2 assignments per day for consistent learning
-5. **Review Past Work** - Look at previous assignments to reinforce concepts
-6. **Build Projects** - Level 4 has a Refactoring Project where you combine everything
+- Week 1: Assignments 1-8
+- Week 2: Assignments 9-17
+- Week 3: Assignments 18-26
+- Week 4: Assignments 27-36
+- Week 5: Assignments 37-44 plus review
 
----
+See [DAILY_PLAN_14_DAYS.md](c:\Users\gaela\OracleSandBox\PLSQL-Learning\DAILY_PLAN_14_DAYS.md) for the original 32-assignment sprint plan. The new Levels 5-7 extend the course beyond that schedule.
 
-## 📊 Tracking Your Progress
+## Files To Use
 
-### View All Completed Assignments
-```sql
-SELECT * FROM assignment_attempts WHERE status = 'COMPLETED' ORDER BY attempt_date;
-```
+- [QUICK_START_GUIDE.sql](c:\Users\gaela\OracleSandBox\PLSQL-Learning\QUICK_START_GUIDE.sql)
+- [learning_course.sql](c:\Users\gaela\OracleSandBox\PLSQL-Learning\learning_course.sql)
+- [EXAMPLE_SOLUTIONS_LEVEL1.sql](c:\Users\gaela\OracleSandBox\PLSQL-Learning\EXAMPLE_SOLUTIONS_LEVEL1.sql)
+- [work\README.md](c:\Users\gaela\OracleSandBox\PLSQL-Learning\work\README.md)
 
-### View Your Learning Stats
-```sql
-EXEC show_progress;
-```
+## Notes
 
-### See What's Next
-```sql
-SELECT assignment_id, title FROM learning_curriculum 
-WHERE assignment_id NOT IN (SELECT assignment_id FROM assignment_attempts)
-ORDER BY assignment_id 
-FETCH FIRST 5 ROWS ONLY;
-```
-
----
-
-## 🎯 Curriculum Highlights
-
-### **What You'll Learn**
-
-- ✅ PL/SQL Block Structure (DECLARE, BEGIN, END)
-- ✅ Variables & Data Types
-- ✅ Control Structures (IF, CASE)
-- ✅ Loops (LOOP, FOR, WHILE)
-- ✅ SELECT INTO and Data Retrieval
-- ✅ Procedures (Creating and Calling)
-- ✅ Functions (Creating and Using)
-- ✅ Cursors (Declared, FOR Loop, Parameterized)
-- ✅ Exception Handling (Built-in, Custom)
-- ✅ Packages (Spec & Body)
-- ✅ Records (Table-based, User-defined)
-- ✅ Triggers (INSERT, UPDATE, DELETE)
-- ✅ Collections (Nested Tables, Associative Arrays)
-- ✅ BULK Operations (BULK COLLECT, FORALL)
-- ✅ Dynamic SQL (EXECUTE IMMEDIATE)
-
----
-
-## 🔧 Available Commands
-
-| Command | Purpose |
-|---------|---------|
-| `EXEC show_curriculum;` | Display all assignments organized by level |
-| `EXEC show_assignment(X);` | Show detailed info for assignment #X |
-| `EXEC log_assignment_attempt(X, 'COMPLETED', 'notes');` | Record completion of assignment #X |
-| `EXEC show_progress;` | View your learning progress and statistics |
-
----
-
-## 📌 Important Notes
-
-- **Always test your code** before logging completion
-- **Use DBMS_OUTPUT** when you need to see results  
-- Remember to `SET SERVEROUTPUT ON` for output visibility
-- Save your work in separate SQL files organized by level
-- The database is your sandbox - experiment freely!
-
----
-
-## 🎓 Next Steps
-
-1. Open `learning_course.sql` for quick reference
-2. Run `SELECT * FROM learning_curriculum` to see all assignments
-3. Start with Assignment #1 and work your way through
-4. Use `EXEC show_progress` to track your journey
-5. Join the quest to become a PL/SQL master! 🚀
-
----
-
-**Happy Learning! 🎉**
+- Enable output with `SET SERVEROUTPUT ON`.
+- Solve assignments in order unless we explicitly decide to skip ahead.
+- Use `EXAMPLE_SOLUTIONS_LEVEL1.sql` as a reference, not as the default first attempt.
+- Later assignments may use `SAMPLE_EMPLOYEES`, `INVALID_SALARIES`, and the ETL tables already present in the database.
